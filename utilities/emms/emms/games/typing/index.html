@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">  
+    <title>ESMMS  -  Typing speed Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="ico" href="../../img/logo.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="wrapper">
+      <a href="../../student_list_games.php" class="fa fa-arrow-left" style="text-decoration:none; font-size: 20px;"> back</a>
+      <input type="text" class="input-field">
+      <div class="content-box">
+        <div class="typing-text">
+          <p></p>
+        </div>
+        <div class="content">
+          <ul class="result-details">
+            <li class="time">
+              <p>Time Left:</p>
+              <span><b>60</b>s</span>
+            </li>
+            <li class="mistake">
+              <p>Mistakes:</p>
+              <span>0</span>
+            </li>
+            <li class="wpm">
+              <p>WPM:</p>
+              <span>0</span>
+            </li>
+            <li class="cpm" style="display:none;">
+              <p>CPM:</p>
+              <span>0</span>
+            </li>
+          </ul>
+            <input type="hidden" id="score" name="score">
+            <button>Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/sent.js"></script>
+    <script src="js/main.js"></script>
+  
+  </body>
+</html>

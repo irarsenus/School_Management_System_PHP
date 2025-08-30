@@ -1,0 +1,37 @@
+
+body{
+	font-family: sans-serif;
+}
+.container{
+	display: flex;
+
+}
+
+.logo{
+	flex: 90%;
+}
+
+.location{
+	flex: 10%;
+	font-size: 12px;
+}
+
+.identity{
+	flex: 90%;	
+}
+
+.stamp{
+	flex: 20%;
+	margin-top: 300px;
+}
+.submit{
+	padding: 15px 20px; 
+	background: #009900; 
+	color: white; 
+	border: none; 
+	border-radius: 10px; 
+	cursor: pointer;
+}
+.submit:hover{
+	opacity: 0.9;
+}

@@ -1,0 +1,2 @@
+# School_Management_System_PHP
+academic management includes Marks_Management_School_Fees_Management

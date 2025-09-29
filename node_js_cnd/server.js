@@ -1,66 +1,70 @@
-const express=require ('exprees');
-const app =express();
-const port =3000;
+const express = require('express');
+const app = express();
+const PORT = 3000;
 
+// Use built-in Express JSON parser (bodyParser is not needed)
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
- let items=[];
+let items = [];
 
- //---post
+// Add a home route for testing
+app.get('/', (req, res) => {
+    res.send('Server is working! Go to /items to see items.');
+});
 
- app.post('/items',(res,req)=>{
-const newItem={
+//---POST
+app.post('/items', (req, res) => {
+    // Add validation
+    if (!req.body || !req.body.name) {
+        return res.status(400).json({ error: 'Name is required' });
+    }
+    
+    const newItem = {
+        id: items.length + 2,
+        name: req.body.name,
+    };
+    
+    items.push(newItem);
+    res.status(201).json(newItem);
+});
 
-id:items.length+1,
-name:req.body.name,
-
-
-};
-items.push(newItem);
-
-res.status(200).json(newItem);
-
- });
-//--get
-app.get('/items',(res,req)=>{
-
+//---GET
+app.get('/items', (req, res) => {
     res.json(items);
-
 });
 
-//--put-- 
+//---PUT
+app.put('/items/:id', (req, res) => {
+    const itemId = parseInt(req.params.id, 10);
+    const item = items.find(i => i.id === itemId);
 
-app.put('/items:id',(res,req)=>{
-const itemId=parseInt(req.params.id);
-const item=items.find(i=>i.id===itemId);
-
-if(!item){
-res.status(401).json({message:'Not Found'});
-
-}
-item.name=req.name.body;
-res.json(item);
-
-
-});
-//--delete
-
-app.delete('/items:id',(res,req)=>{
-const itemId=parseInt(req.params.id);
-const itemIndex=items.findIndex(i=>i.id===itemId);
-
-if(itemIndex===-1){
-res.status(404).json({message:'Not Found'});
-
-}
-items.splice(itemIndex,1);
-
-res.status(204).send();
-});
-app.listen(PORT,()=>{
-
-console.log(`the server is running on:',${port}`);
-
+    if (!item) {
+        return res.status(404).json({ message: 'Not Found' });
+    }
+    
+    // Add validation
+    if (!req.body || !req.body.name) {
+        return res.status(400).json({ error: 'Name is required' });
+    }
+    
+    item.name = req.body.name;
+    res.json(item);
 });
 
+//---DELETE
+app.delete('/items/:id', (req, res) => {
+    const itemId = parseInt(req.params.id, 10);
+    const itemIndex = items.findIndex(i => i.id === itemId);
 
+    if (itemIndex === -1) {
+        return res.status(404).json({ message: 'Not Found' });
+    }
+    
+    items.splice(itemIndex, 1);
+    res.status(204).send();
+});
+
+app.listen(PORT, () => {
+    console.log(`The server is running on port ${PORT}`);
+});
